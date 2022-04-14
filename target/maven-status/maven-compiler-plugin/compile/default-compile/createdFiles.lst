@@ -1,0 +1,17 @@
+ru\spec\spring\entity\Tag.class
+ru\spec\spring\repository\PostRepository.class
+ru\spec\spring\entity\Post.class
+ru\spec\spring\entity\Comment.class
+ru\spec\spring\config\MyWebAppInitializer.class
+ru\spec\spring\config\DataConfig.class
+ru\spec\spring\repository\TagRepository.class
+ru\spec\spring\entity\Role.class
+ru\spec\spring\controller\HelloController.class
+ru\spec\spring\controller\PostController.class
+ru\spec\spring\config\WebConfig.class
+ru\spec\spring\repository\UserRepository.class
+ru\spec\spring\service\TagService.class
+ru\spec\spring\config\AppInitializer.class
+ru\spec\spring\entity\User.class
+ru\spec\spring\repository\RoleRepository.class
+ru\spec\spring\service\TagServiceImpl.class

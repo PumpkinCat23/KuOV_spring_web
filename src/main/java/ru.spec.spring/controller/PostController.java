@@ -17,7 +17,7 @@ public class PostController {
     }
 
 
-    @GetMapping
+    @GetMapping ("/blog")
     public String blog(ModelMap model) {
         model.put("posts", postRepository.findAll());
 
