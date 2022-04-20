@@ -8,12 +8,16 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.spec.spring.entity.Post;
 import ru.spec.spring.entity.User;
 import ru.spec.spring.repository.PostRepository;
 import ru.spec.spring.repository.UserRepository;
 import ru.spec.spring.service.UserService;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Controller
 public class PostController {
@@ -25,9 +29,11 @@ public class PostController {
 
     @Autowired
     public PostController(PostRepository postRepository,
-                          UserRepository userRepository) {
+                          UserRepository userRepository,
+                          UserService userService) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -44,7 +50,7 @@ public class PostController {
             model.put("posts", postRepository.findAll(SORT_DT_CREATED));
         }
 
-        model.put("users", userRepository.findAll());
+        setCommonParams(model);
 
         return "blog";
 
@@ -58,9 +64,16 @@ public class PostController {
 
 //        model.put("posts", postRepository.findByUser_Username(username));
         User user = userService.findByUsername(username);
-        model.put("posts", user.getPosts());
+        List<Post> posts = user.getPosts().stream().sorted(Comparator.comparing(Post::getDtCreated)
+                .reversed()).collect(Collectors.toList());
+        model.put("posts", posts);
 
+        setCommonParams(model);
         return "blog";
+    }
+
+    private void setCommonParams(ModelMap model) {
+        model.put("users", userRepository.findAll());
     }
 
     private String cropTo20Symbols (String str) {
