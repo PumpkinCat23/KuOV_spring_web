@@ -1,5 +1,6 @@
 package ru.spec.spring.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.spec.spring.entity.Post;
 
@@ -18,5 +19,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     //  Написать метод для нахождеия постов, текст(content) которых включает
 //  заданную подстроку без учёта регистра букв
 //  "world" -> "Hello World", ...
-    List<Post> findByContentContainingIgnoreCase(String substring);
+    List<Post> findByContentContainingIgnoreCase(String substring, Sort sort);
 }

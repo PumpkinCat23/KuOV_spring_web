@@ -35,4 +35,7 @@ public class User {
     )
     private List<Role> roles;
 
+    @OneToMany (mappedBy = "user")
+    private List<Post> posts;
+
 }
