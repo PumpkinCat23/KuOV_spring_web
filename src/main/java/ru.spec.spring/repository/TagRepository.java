@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import ru.spec.spring.entity.Tag;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
@@ -15,7 +16,10 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
                             "group by t.tag_id " +
                             "order by count(*) desc ",
             nativeQuery = true)
+
     List<Tag> findAllSortedByPostCount();
+
+    Optional<Tag> findByName (String name);
 
 
 }
