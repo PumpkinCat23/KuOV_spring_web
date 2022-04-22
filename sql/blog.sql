@@ -63,13 +63,13 @@ insert into role(name) values ('ADMIN');
 insert into role(name) values ('USER');
 
 insert into "user" (username, password, dt_created, is_active)
-    values ('admin', 'admin', now()::timestamp, true);
+    values ('admin', '$2a$10$JX5XVKGsXvEOIrd799VJ5uGWfpNylr.x2EIPpgH2nmd8RrIsey0Iq', now()::timestamp, true);
 
 insert into "user" (username, password, dt_created, is_active)
-    values ('user2', 'user2', now()::timestamp, true);
+    values ('user2', '$2a$10$t5plPRryfDJss8Ilqn9wTO/2XppjJAvKoSYvZr5P69hct5d.6NARS', now()::timestamp, true);
 
 insert into "user" (username, password, dt_created, is_active)
-    values ('user3', 'user3', now()::timestamp, true);
+    values ('user3', '$2a$10$c/rUTPeXMQiZE8lWDFtTwuxOHLFAck.1ZC7tjTYJ.cQ03Q6miO3EG', now()::timestamp, true);
 
 insert into user_role(user_id, role_id) values (1, 1);
 insert into user_role(user_id, role_id) values (2, 2);
