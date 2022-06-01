@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
-        post.setDtUpdated(LocalDateTime.now());
+        post.setDtCreated(LocalDateTime.now());
 
         UserDetails details = getCurrentUserDetails();
         post.setUser(userRepository.findByUsername(details.getUsername())
@@ -52,6 +52,13 @@ public class PostServiceImpl implements PostService {
         post.setTags(parseTags(postDto.getTags()));
 
         postRepository.save(post);
+    }
+
+    @Override
+    public Post findById(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(NoSuchElementException::new);
+        post.getTags().size();
+        return post;
     }
 
     private List<Tag> parseTags(String tags) {

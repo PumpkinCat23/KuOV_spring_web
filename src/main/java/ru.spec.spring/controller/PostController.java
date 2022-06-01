@@ -107,6 +107,13 @@ public class PostController {
         return "redirect:/";
     }
 
+    @GetMapping("/post/{postId}")
+    public String get (@PathVariable Long postId, ModelMap model) {
+        model.put("post", postService.findById(postId));
+        setCommonParams(model);
+        return "post";
+    }
+
     private void setCommonParams(ModelMap model) {
         model.put("users", userRepository.findAll());
         model.put("tags", tagRepository.findAllSortedByPostCount());
