@@ -32,7 +32,7 @@ public class UserController {
     public String signUp(String username, String password) {
         userService.create(username, password);
 
-        return "redirect:/";
+        return "redirect:/sign-in";
     }
 
 }

@@ -7,12 +7,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.spec.spring.dto.PostDto;
 import ru.spec.spring.entity.Post;
 import ru.spec.spring.entity.User;
 import ru.spec.spring.repository.PostRepository;
 import ru.spec.spring.repository.TagRepository;
 import ru.spec.spring.repository.UserRepository;
+import ru.spec.spring.service.PostService;
 import ru.spec.spring.service.TagService;
 import ru.spec.spring.service.UserService;
 
@@ -31,18 +34,21 @@ public class PostController {
     private final TagRepository tagRepository;
     private final UserService userService;
     private final TagService tagService;
+    private final PostService postService;
 
     @Autowired
     public PostController(PostRepository postRepository,
                           UserRepository userRepository,
                           TagRepository tagRepository,
                           UserService userService,
-                          TagService tagService) {
+                          TagService tagService,
+                          PostService postService) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.tagRepository = tagRepository;
         this.userService = userService;
         this.tagService = tagService;
+        this.postService = postService;
     }
 
 
@@ -89,6 +95,17 @@ public class PostController {
         return "blog";
     }
 
+    @GetMapping("/post/new")
+    public String create (ModelMap model) {
+        setCommonParams(model);
+        return "post-new";
+    }
+
+    @PostMapping("/post/new")
+    public String create (PostDto postDto) {
+        postService.create(postDto);
+        return "redirect:/";
+    }
 
     private void setCommonParams(ModelMap model) {
         model.put("users", userRepository.findAll());
